@@ -1,0 +1,4 @@
+baseURL: "https://bigodglabs.com/"
+title: BigDogLabs
+paginate: 5
+theme: puppet-master
