@@ -40,7 +40,7 @@ gem "kramdown-parser-gfm"
 gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 
 # Added to fix serve errors
-gem "webrick"
+#gem "webrick"
 gem "jekyll-admin"
 gem "jekyll-include-cache"
 gem "minimal-mistakes-jekyll"
