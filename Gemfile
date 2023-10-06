@@ -43,4 +43,4 @@ gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 #gem "webrick"
 gem "jekyll-admin"
 gem "jekyll-include-cache"
-gem "minimal-mistakes-jekyll"
+#gem "minimal-mistakes-jekyll"
