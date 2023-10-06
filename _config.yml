@@ -9,7 +9,7 @@ url: 'https://dev.bigdoglabs.com'
 twitter_username: mikehathaway
 github_username: mjh2902
 markdown: kramdown
-remote_theme: "mmistakes/minimal-mistakes-jekyll@4.24.0"
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
 plugins:
   - jekyll-feed
   - jekyll-admin
