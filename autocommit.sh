@@ -5,8 +5,7 @@ cd /Users/Shared/docker/dev.mikehathaway.com
 # Run job every hour using cron
 # 0 * * * * /root/docker/dev.mikehathaway.com/autocommit.sh
 
-# Github Personal Access Token
-# REDACTED_PAT
+# Github Personal Access Token (removed for security)
 
 #!/bin/bash
 
