@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -35,5 +35,38 @@ jobs:
       with:
         path: ./_site
 
-    - name: Deploy to GitHub Pages
-      uses: actions/deploy-pages@v1
+    - name: Deploy to gh-pages branch via GITHUB_TOKEN
+      env:
+        REPO: ${{ github.repository }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        COMMIT_MSG: "Deploy site from ${GITHUB_SHA}"
+      run: |
+        set -e
+        echo "Preparing deploy to gh-pages"
+        # Clone the repo using the token for authentication
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+        git clone --depth=1 https://x-access-token:${GH_TOKEN}@github.com/${REPO} repo
+        cd repo
+
+        # Create or switch to gh-pages branch
+        if git show-ref --quiet refs/heads/gh-pages; then
+          git checkout gh-pages
+        else
+          git checkout --orphan gh-pages
+          git rm -rf . || true
+        fi
+
+        # Copy generated site into repo
+        rsync -a --delete ../_site/ .
+
+        # If no changes, exit
+        if git status --porcelain | grep .; then
+          git add -A
+          git commit -m "${COMMIT_MSG}"
+          git push --force origin gh-pages
+          echo "Deployed to gh-pages"
+        else
+          echo "No changes to deploy"
+        fi
