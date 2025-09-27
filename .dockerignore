@@ -3,3 +3,4 @@ _site
 .github
 .git
 README.md
+Gemfile.lock
