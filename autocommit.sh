@@ -1,9 +1,9 @@
 #!/bin/bash
 # path to repo (change if repo moves)
-cd /Users/Shared/docker/dev.mikehathaway.com
+cd /Users/Shared/docker/bigdoglabs.com
 
 # Run job every hour using cron
-# 0 * * * * /root/docker/dev.mikehathaway.com/autocommit.sh
+# 0 * * * * /Users/Shared/docker/bigdoglabs.com/autocommit.sh
 
 # Github Personal Access Token (removed for security)
 
