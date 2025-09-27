@@ -30,14 +30,20 @@ jobs:
     - name: Build site
       run: bundle exec jekyll build --destination _site
 
-    - name: Deploy to gh-pages branch via GITHUB_TOKEN (robust)
+    - name: Deploy to gh-pages using SSH deploy key
       env:
         REPO: ${{ github.repository }}
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        COMMIT_MSG: "Deploy site from ${GITHUB_SHA}"
+      uses: webfactory/ssh-agent@v0.7.0
+      with:
+        ssh-private-key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+
+    - name: Push built site to gh-pages via SSH
+      env:
+        REPO: ${{ github.repository }}
         COMMIT_MSG: "Deploy site from ${GITHUB_SHA}"
       run: |
         set -euo pipefail
-        echo "Preparing deploy to gh-pages (temporary repo)"
         git config --global user.name "github-actions[bot]"
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
@@ -45,11 +51,9 @@ jobs:
         echo "Using temp dir: ${TMPDIR}"
         cd "${TMPDIR}"
 
-        # Initialize a fresh repo and create gh-pages branch
         git init
-        git remote add origin https://x-access-token:${GH_TOKEN}@github.com/${REPO}
+        git remote add origin git@github.com:${REPO}.git
 
-        # If gh-pages exists remotely, fetch it; otherwise create orphan branch
         if git ls-remote --exit-code --heads origin gh-pages; then
           git fetch --depth=1 origin gh-pages
           git checkout -b gh-pages FETCH_HEAD
@@ -57,7 +61,6 @@ jobs:
           git checkout --orphan gh-pages
         fi
 
-        # Clean and copy built site
         git rm -rf . || true
         rsync -a --delete "${GITHUB_WORKSPACE}/_site/" ./
 
@@ -69,4 +72,4 @@ jobs:
         git add -A
         git commit -m "${COMMIT_MSG}"
         git push --force origin gh-pages
-        echo "Deployed to gh-pages"
+        echo "Deployed to gh-pages via SSH"
