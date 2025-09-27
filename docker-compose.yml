@@ -1,10 +1,10 @@
 services:
   jekyll:
-    image: bretfisher/jekyll-serve
-    container_name: dev.bigdoglabs.com
+    image: bretfisher/jekyll-serve:latest
+    container_name: bigdoglabs.com
     network_mode: bridge
     ports:
-      - "4003:4000"
+      - "4004:4000"
     volumes:
       - .:/site
     restart: unless-stopped
