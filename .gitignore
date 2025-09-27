@@ -2,3 +2,7 @@ _site
 .sass-cache
 .jekyll-metadata
 .vscode/
+
+# Deploy key for GitHub Actions gh-pages deploy
+gh-pages-deploy-key
+gh-pages-deploy-key.pub
