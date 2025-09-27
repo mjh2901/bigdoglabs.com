@@ -30,38 +30,43 @@ jobs:
     - name: Build site
       run: bundle exec jekyll build --destination _site
 
-    - name: Deploy to gh-pages branch via GITHUB_TOKEN
+    - name: Deploy to gh-pages branch via GITHUB_TOKEN (robust)
       env:
         REPO: ${{ github.repository }}
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         COMMIT_MSG: "Deploy site from ${GITHUB_SHA}"
       run: |
-        set -e
-        echo "Preparing deploy to gh-pages"
-        # Clone the repo using the token for authentication
+        set -euo pipefail
+        echo "Preparing deploy to gh-pages (temporary repo)"
         git config --global user.name "github-actions[bot]"
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-        git clone --depth=1 https://x-access-token:${GH_TOKEN}@github.com/${REPO} repo
-        cd repo
+        TMPDIR=$(mktemp -d)
+        echo "Using temp dir: ${TMPDIR}"
+        cd "${TMPDIR}"
 
-        # Create or switch to gh-pages branch
-        if git show-ref --quiet refs/heads/gh-pages; then
-          git checkout gh-pages
+        # Initialize a fresh repo and create gh-pages branch
+        git init
+        git remote add origin https://x-access-token:${GH_TOKEN}@github.com/${REPO}
+
+        # If gh-pages exists remotely, fetch it; otherwise create orphan branch
+        if git ls-remote --exit-code --heads origin gh-pages; then
+          git fetch --depth=1 origin gh-pages
+          git checkout -b gh-pages FETCH_HEAD
         else
           git checkout --orphan gh-pages
-          git rm -rf . || true
         fi
 
-        # Copy generated site into repo
-        rsync -a --delete ../_site/ .
+        # Clean and copy built site
+        git rm -rf . || true
+        rsync -a --delete "${GITHUB_WORKSPACE}/_site/" ./
 
-        # If no changes, exit
-        if git status --porcelain | grep .; then
-          git add -A
-          git commit -m "${COMMIT_MSG}"
-          git push --force origin gh-pages
-          echo "Deployed to gh-pages"
-        else
+        if [ -z "$(git status --porcelain)" ]; then
           echo "No changes to deploy"
+          exit 0
         fi
+
+        git add -A
+        git commit -m "${COMMIT_MSG}"
+        git push --force origin gh-pages
+        echo "Deployed to gh-pages"
