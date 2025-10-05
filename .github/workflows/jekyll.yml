@@ -42,6 +42,9 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+      - name: Install Ruby dependencies
+        # Ensure Bundler installs gems so `bundle exec jekyll` is available.
+        run: bundle install --jobs 4 --retry 3
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
