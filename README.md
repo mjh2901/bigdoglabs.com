@@ -1,71 +1,67 @@
-# Particle Jekyll Theme
+# Big Dog Labs — Corporate Website
 
-![](./particle.jpg)
+This repository contains the source for the Big Dog Labs corporate website ([bigdoglabs.com](https://bigdoglabs.com)). Big Dog Labs is a small consulting company specializing in education, documentation, and team upskilling. The site is built with Jekyll and a lightweight front-end toolchain.
 
-This is a simple and minimalist template for Jekyll designed for developers that want to show of their portfolio.
+## What is in this repository
 
-The Theme features:
+- Jekyll site source (layouts, includes, posts, pages)
+- Sass styles and front-end assets (under `assets/`)
+- GitHub Actions workflow for building and deploying to GitHub Pages (`.github/workflows/jekyll.yml`)
 
-- Gulp
-- SASS
-- Sweet Scroll
-- Particle.js
-- BrowserSync
-- Font Awesome and Devicon icons
-- Google Analytics
-- Info Customization
+## Primary goals
 
-## Basic Setup
+- Present company information, services, and process (Learn → Plan → Implement)
+- Host documentation, blog posts, and project showcases
+- Provide an easy local development experience for editing and previewing content
 
-1. [Install Jekyll](http://jekyllrb.com)
-2. Clone the particle theme: `git clone https://github.com/nrandecker/particle.git`
-3. Edit `_config.yml` to personalize your site.
+## Tech stack
 
-## Site and User Settings
+- Jekyll (site generator)
+- Ruby / Bundler (gems and Jekyll runtime)
+- Sass for styles
+- Gulp (optional, used for asset tasks in the original theme)
 
-You have to fill some informations on `_config.yml` to customize your site.
+## Local development
 
+1. Install system dependencies: Ruby + Bundler and Node.js
+2. Install Ruby gems and JavaScript dependencies
+3. Build and serve the site locally
+
+```bash
+# install ruby tools
+gem install bundler jekyll      # or use your preferred Ruby manager
+
+# install repo dependencies
+bundle install                  # install gems from Gemfile
+npm install || yarn             # install JS deps if present
+
+# run dev server with live reload
+bundle exec jekyll serve --livereload
+
+# or build static to _site
+bundle exec jekyll build
 ```
-# Site settings
-description: A blog about lorem ipsum dolor sit amet
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://localhost:3000" # the base hostname & protocol for your site
 
-# User settings
-username: Lorem Ipsum
-user_description: Anon Developer at Lorem Ipsum Dolor
-user_title: Anon Developer
-email: anon@anon.com
-twitter_username: lorem_ipsum
-github_username:  lorem_ipsum
-gplus_username:  lorem_ipsum
-```
+If this repository includes Gulp tasks (see `gulpfile.js`), you can also run `gulp` after installing Node dependencies.
 
-**Don't forget to change your url before you deploy your site!**
+## Configuration and customization
 
-## Color and Particle Customization
-- Color Customization
-  - Edit the sass variables
-- Particle Customization
-  - Edit the json data in particle function in app.js
-  - Refer to [Particle.js](https://github.com/VincentGarreau/particles.js/) for help
+- Edit `_config.yml` to change site title, description, author, and other settings. The file already contains values for `title: Big Dog Labs` and other site metadata.
+- Place images and static assets under `assets/` and reference them from templates or markdown files.
 
-## Running the blog in local
+## Deployment notes
 
-In order to compile the assets and run Jekyll on local you need to follow those steps:
-
-- Install [NodeJS](https://nodejs.org/)
-- Install [Jekyll](https://jekyllrb.com): `sudo gem install bundler jekyll`
-- Install [Yarn](https://yarnpkg.com/): `npm install -g yarn`
-- Install dependencies: `yarn`
-- Run: `gulp`
+- This site is built and deployed to GitHub Pages using a GitHub Actions workflow. See `.github/workflows/jekyll.yml` for the exact steps.
+- If you use a custom domain, add a `CNAME` file at the site root or configure the workflow to write one during build (the workflow may already include an optional CNAME step).
 
 ## License
 
-This theme is free and open source software, distributed under the The MIT License. So feel free to use this Jekyll theme anyway you want.
+This site and its source are provided under the MIT License (see `LICENSE`).
 
 ## Credits
 
-This theme was partially designed with the inspiration from these fine folks
-- [Willian Justen](https://github.com/willianjusten/will-jekyll-template)
-- [Vincent Garreau](https://github.com/VincentGarreau/particles.js/)
+- Based on a Jekyll theme and front-end work inspired by community templates and open source libraries.
+
+## Contact
+
+- For changes to this repository, open a PR or contact the site maintainer listed in the repository metadata.
