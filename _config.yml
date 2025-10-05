@@ -5,9 +5,9 @@ baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://bigdoglabs.com" # the base hostname & protocol for your site e.g. http://willianjusten.com.br
 
 # User settings
-username: mjh2901
-user_description: Mike Hathaway is the founder of Big Dog Labs, a technology company dedicated to providing innovative solutions and services to help businesses thrive in the digital age. With a passion for technology and a commitment to excellence, Mike leads a team of experts specializing in software development, IT consulting, and digital transformation strategies. With years of experience in the industry, Mike is dedicated to helping businesses leverage technology to achieve their goals and stay ahead in today's competitive market.
-user_title: Software Developer
+username: Big Dog Labs
+user_description: Big Dog Labs, a technology company dedicated to providing innovative solutions and services to help businesses thrive in the digital age. With a passion for technology and a commitment to excellence, Big Dog Labs includes a team of experts specializing in software development, IT consulting, and digital transformation strategies. With years of experience in the industry, Big Dog Labs is dedicated to helping businesses leverage technology to achieve their goals and stay ahead in today's competitive market.
+user_title: Technology and Code for the Big Dogs
 email: mike@mikehathaway.com
 twitter_username: mikehathaway
 github_username:  mjh2901
