@@ -6,3 +6,7 @@ _site
 # Deploy key for GitHub Actions gh-pages deploy
 gh-pages-deploy-key
 gh-pages-deploy-key.pub
+
+# macOS Finder metadata
+.DS_Store
+**/.DS_Store
