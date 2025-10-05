@@ -1,7 +1,6 @@
 _site
 .sass-cache
-.jekyll-metadata
-.vscode/
+node_modules
 
 # Deploy key for GitHub Actions gh-pages deploy
 gh-pages-deploy-key
