@@ -1,5 +1,9 @@
 # Big Dog Labs — Corporate Website
 
+|   |
+|:--:|
+| ![Big Dog Labs logo](assets/img/bigdoglabs_longlogo.png) |
+
 This repository contains the source for the Big Dog Labs corporate website ([bigdoglabs.com](https://bigdoglabs.com)). Big Dog Labs is a small consulting company specializing in education, documentation, and team upskilling. The site is built with Jekyll and a lightweight front-end toolchain.
 
 ## What is in this repository
